@@ -22,8 +22,12 @@
       </li>
       <li class="nav-item" th:classappend="${activeTab == 'showform' ? 'active' : ''}">
         <a class="nav-link" href="/product/showForm">Добавить продукт</a>
+      <li class="nav-item" th:classappend="${activeTab == 'simpleListUser' ? 'active' : ''}">
+        <a class="nav-link" href="/user/showall">Список пользователей</a>
       <li class="nav-item" th:classappend="${activeTab == 'adminUser' ? 'active' : ''}">
         <a class="nav-link" href="/user/admin/0">Управление пользователями</a>
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Выйти из системы</a>
       </li>
     </ul>
   </div>

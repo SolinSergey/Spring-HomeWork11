@@ -21,7 +21,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/product/**").hasAnyRole("ADMIN", "MANAGER") // ROLE_ADMIN, ROLE_SUPERADMIN
-                //.antMatchers("/product/**").authenticated()
+                .antMatchers("/user/showall/**").hasAnyRole("ADMIN")
+                .antMatchers("/user/admin/**").hasAnyRole("ROOT")
                 //.antMatchers("/admin/**").hasAnyRole("ADMIN", "SUPERADMIN") // ROLE_ADMIN, ROLE_SUPERADMIN
                 //.antMatchers("/admin/**").hasAnyRole("ADMIN", "SUPERADMIN") // ROLE_ADMIN, ROLE_SUPERADMIN
                 //.antMatchers("/user_info").authenticated()

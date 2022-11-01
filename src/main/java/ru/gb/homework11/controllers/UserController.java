@@ -85,4 +85,5 @@ public class UserController {
         userService.addUser(userInfo,checkBoxGroup);
         return "redirect:/user/admin/0";
     }
+
 }
