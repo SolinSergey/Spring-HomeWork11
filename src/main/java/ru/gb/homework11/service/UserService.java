@@ -12,7 +12,9 @@ import ru.gb.homework11.entities.Role;
 import ru.gb.homework11.entities.User;
 import ru.gb.homework11.repositories.UserRepository;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -34,5 +36,14 @@ public class UserService implements UserDetailsService {
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+    }
+
+    public List<User> findAllUsers (){
+        Iterable<User> userIterable = userRepository.findAll();
+        List<User> users = new ArrayList<>();
+        for(User u:userIterable){
+            users.add(u);
+        }
+        return users;
     }
 }

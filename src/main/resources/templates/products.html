@@ -30,19 +30,49 @@
             <td>Наименование</td>
             <td>Цена</td>
             <td></td>
+            <td></td>
         </tr>
     </thead>
     <tbody>
         <tr th:each="product:${products}" th:align="center">
-            <td th:text="${product.title}" class="col-7"></td>
+            <td th:text="${product.title}" class="col-5"></td>
             <td th:text="${product.price}" class="col-2"></td>
-            <td class="col-3"> <a class="btn btn-primary btn-lg" th:href="@{'/product/removebyid/' + ${product.id}}" role="button">Удалить</a></td>
+            <td class="col-2"> <a class="btn btn-primary btn-lg" th:href="@{'/product/removebyid/' + ${product.id}}" role="button">Удалить</a></td>
+            <td class="col-3"> <a class="btn btn-primary btn-lg" th:href="@{'/product/findall/' + ${currentpage}+'/'+${product.id}}" role="button">Редактировать</a></td>
         </tr>
     </tbody>
 </table>
     <th:block th:each="page:${pages}">
-        <a th:href="@{'/product/findall/' + ${page}}" th:text="${page}"> </a>
+        <a th:href="@{'/product/findall/' + ${page}+'/0'}" th:text="${page}"> </a>
     </th:block>
+</div>
+
+<div class="container" th:align="center">
+<form th:action="@{/product/processForm}" th:object="${product}" method="post">
+    <table>
+        <br>
+        <tr hidden>
+            <div class='is-node custom-form'>
+                <td><label>Id: </label></td><td><input type="text" th:field="*{id}"/></td>
+            </div>
+        </tr>
+        <tr>
+            <div class='is-node custom-form'>
+                <td><label>Название продукта: </label></td><td><input type="text" th:field="*{title}"/></td>
+            </div>
+        </tr>
+        <tr>
+            <div class='is-node custom-form'>
+                <td><label>Цена: </label></td><td><input type="text" th:field="*{price}"/></td>
+            </div>
+        </tr>
+        <tr>
+            <td><input name="submit" type="submit" value="submit" />></td>
+        </tr>
+
+    </table>
+
+</form>
 </div>
 </body>
 </html>

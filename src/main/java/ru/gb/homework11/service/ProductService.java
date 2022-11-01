@@ -3,6 +3,7 @@ package ru.gb.homework11.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import ru.gb.homework11.entities.Product;
 import ru.gb.homework11.repositories.ProductRepository;
@@ -50,8 +51,10 @@ public class ProductService {
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
     }
-    @Transactional
+
+    @Modifying
     public void addProduct(Product product) {
+        //System.out.println(product);
         productRepository.save(product);
     }
 }
