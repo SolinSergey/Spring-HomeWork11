@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.gb.homework11.entities.*;
-import ru.gb.homework11.service.ProductService;
 import ru.gb.homework11.service.RoleService;
 import ru.gb.homework11.service.UserService;
 
@@ -20,6 +19,7 @@ public class UserController {
 
     private UserService userService;
     private RoleService roleService;
+
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -41,17 +41,14 @@ public class UserController {
     public String adminUsers(Model model,@PathVariable(value = "id") Long id){
         List<User> userList = userService.findAllUsersList();
         List<UserInfo> userInfoList = new ArrayList<>();
-        //System.out.println(userInfoList);
         Collection<Role> list=null;
         UserInfo userInfo=null;
         for (User u:userList){
-            //System.out.print(u.getUsername()+"=");
             list=u.getRoles();
             String role="";
             for (Role r:list){
                 role=role+r.getName()+" ";
             }
-            //System.out.println(role);
             userInfoList.add(new UserInfo(u.getId(),u.getUsername(),role,u.getEmail(),u.getPassword()));
         }
         CheckBoxGroup checkBoxGroup=null;
@@ -62,7 +59,6 @@ public class UserController {
             checkBoxGroup=new CheckBoxGroup();
             Optional<User> user=userService.findById(id);
             list=user.get().getRoles();
-            System.out.println(list);
             for (Role l:list){
                 if (l.getName().equals("ROLE_USER")) checkBoxGroup.setUserRole(true);
                 if (l.getName().equals("ROLE_ADMIN")) checkBoxGroup.setAdminRole(true);
@@ -74,14 +70,11 @@ public class UserController {
         model.addAttribute("check",checkBoxGroup);
         model.addAttribute("listusers", userInfoList);
         model.addAttribute("userinfo",userInfo);
-        //System.out.println(userInfo);
-       // System.out.println(checkBoxGroup);
         return "adminuserpage";
     }
 
     @PostMapping("/processForm")
     public String processForm(@ModelAttribute UserInfo userInfo, CheckBoxGroup checkBoxGroup, Model model) {
-        //System.out.println(userInfo);
         userService.addUser(userInfo,checkBoxGroup);
         return "redirect:/user/admin/0";
     }

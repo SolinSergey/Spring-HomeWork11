@@ -51,7 +51,6 @@ public class UserService implements UserDetailsService {
         List<User> users = new ArrayList<>();
         for(User u:userIterable){
             users.add(u);
-           // System.out.println(u.getRoles().toString());
         }
         return users;
     }
@@ -62,14 +61,11 @@ public class UserService implements UserDetailsService {
         List<User> users = new ArrayList<>();
         for(User u:userIterable){
             users.add(u);
-            //System.out.println(u.getRoles().toString());
         }
         return userIterable;
     }
 
     public void addUser(UserInfo userInfo, CheckBoxGroup checkBoxGroup){
-        System.out.println(userInfo);
-        //System.out.println(checkBoxGroup);
         User user=new User();
         user.setUsername(userInfo.getName());
         if (userInfo.getId()==0){
@@ -86,7 +82,6 @@ public class UserService implements UserDetailsService {
         if (checkBoxGroup.isAdminRole()) roles.add((new Role(2L,"ROLE_ADMIN")));
         if (checkBoxGroup.isRootRole()) roles.add((new Role(4L,"ROLE_ROOT")));
         user.setRoles(roles);
-       // System.out.println(user);
         userRepository.save(user);
     }
 

@@ -54,7 +54,6 @@ public class ProductService {
 
     @Modifying
     public void addProduct(Product product) {
-        //System.out.println(product);
         productRepository.save(product);
     }
 }

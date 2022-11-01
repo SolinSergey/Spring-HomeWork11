@@ -43,7 +43,6 @@ public class ProductController {
             product.setPrice(0);
         }else {
             product=productService.findById(editId).get();
-            System.out.println(product);
         }
         model.addAttribute("products", list);
         model.addAttribute("pages",pages);

@@ -20,13 +20,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/product/**").hasAnyRole("ADMIN", "MANAGER") // ROLE_ADMIN, ROLE_SUPERADMIN
+                .antMatchers("/product/**").hasAnyRole("ADMIN", "MANAGER")
                 .antMatchers("/user/showall/**").hasAnyRole("ADMIN")
                 .antMatchers("/user/admin/**").hasAnyRole("ROOT")
-                //.antMatchers("/admin/**").hasAnyRole("ADMIN", "SUPERADMIN") // ROLE_ADMIN, ROLE_SUPERADMIN
-                //.antMatchers("/admin/**").hasAnyRole("ADMIN", "SUPERADMIN") // ROLE_ADMIN, ROLE_SUPERADMIN
-                //.antMatchers("/user_info").authenticated()
-                //.antMatchers("/admin/**").hasAnyRole("ADMIN", "SUPERADMIN") // ROLE_ADMIN, ROLE_SUPERADMIN
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
@@ -34,10 +30,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID");
-//                .and()
-//                .sessionManagement()
-//                .maximumSessions(1)
-//                .maxSessionsPreventsLogin(true);
     }
 
     @Bean
